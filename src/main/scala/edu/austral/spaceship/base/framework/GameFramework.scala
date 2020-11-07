@@ -7,7 +7,7 @@ trait GameFramework {
 
   def setup(windowsSettings: WindowSettings, imageLoader: ImageLoader): Unit
 
-  def draw(graphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Int]): Unit
+  def draw(graphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): Unit
 
   def keyPressed(event: KeyEvent): Unit
 

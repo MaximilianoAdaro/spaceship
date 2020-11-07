@@ -12,7 +12,7 @@ case class Bullet(bulletType: BulletType, position: Vector2, weapon: Weapon, spe
 
   override def getShape: Shape = bulletType.shape
 
-  override def getImage(visitor: ImageProvider): PImage = ???
+  override def getImage(visitor: ImageProvider): PImage = visitor.getImage(bulletType.name)
 
   override def getPosition: Vector2 = position
 

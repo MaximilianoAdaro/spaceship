@@ -12,7 +12,7 @@ case class Starship(starshipType: StarshipType, position: Vector2, player: Playe
 
   override def getShape: Shape = starshipType.shape
 
-  override def getImage(visitor: ImageProvider): PImage = ???
+  override def getImage(visitor: ImageProvider): PImage = visitor.getImage(starshipType.name)
 
   override def getPosition: Vector2 = position
 

@@ -12,7 +12,7 @@ case class Asteroid(asteroidType: AsteroidType, position: Vector2, speed: Vector
 
   override def getShape: Shape = asteroidType.shape
 
-  override def getImage(visitor: ImageProvider): PImage = ???
+  override def getImage(visitor: ImageProvider): PImage = visitor.getImage(asteroidType.name)
 
   override def getPosition: Vector2 = position
 

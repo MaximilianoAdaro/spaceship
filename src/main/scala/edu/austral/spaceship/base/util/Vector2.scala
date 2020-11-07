@@ -1,5 +1,6 @@
 package edu.austral.spaceship.base.util
 
+import scala.language.postfixOps
 import java.lang.Math.{atan2, cos, sin}
 
 case class Vector2(x: Float, y: Float) {

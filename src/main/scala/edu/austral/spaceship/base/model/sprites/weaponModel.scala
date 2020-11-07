@@ -12,7 +12,7 @@ case class Weapon(weaponType: WeaponType, position: Vector2, starship: Starship,
 
   override def getShape: Shape = weaponType.shape
 
-  override def getImage(visitor: ImageProvider): PImage = ???
+  override def getImage(visitor: ImageProvider): PImage = visitor.getImage(weaponType.name)
 
   override def getPosition: Vector2 = position
 
