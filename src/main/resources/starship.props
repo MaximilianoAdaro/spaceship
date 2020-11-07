@@ -1,0 +1,11 @@
+maxX = 1500
+maxY = 1000
+maxLives = 3
+players = 1
+
+playerName1 = Maxi
+up1 = w
+down1 = s
+left1 = a
+right1 = d
+shoot1 = q

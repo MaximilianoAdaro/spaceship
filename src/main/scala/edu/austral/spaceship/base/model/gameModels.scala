@@ -6,4 +6,4 @@ case class Player(name: String, controls: Controls)
 
 case class Controls(upKey: Char, downKey: Char, leftKey: Char, rightKey: Char, shootKey: Char)
 
-case class GameSprites(starships: List[Starship], asteroids: List[Asteroid], bullets: List[Bullet], weapons: List[Weapon])
+case class GameSprites(starships: List[Starship], asteroids: List[Asteroid], weapons: List[Weapon], bullets: List[Bullet])

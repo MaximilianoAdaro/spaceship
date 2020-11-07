@@ -20,3 +20,7 @@ case class Vector2(x: Float, y: Float) {
   def angle: Float = (atan2(y, x) - atan2(0, 1)) toFloat
 
 }
+
+object Vector2 {
+  val ZERO: Vector2 = Vector2(0, 0)
+}

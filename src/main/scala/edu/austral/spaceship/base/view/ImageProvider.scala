@@ -10,6 +10,10 @@ class ImageProvider {
 
   def getImage(sprite: Sprite): PImage = sprite.getImage(this)
 
-  def getImage(imageName: String): PImage = images(imageName)
+  def getImage(imageName: String, size: Int): PImage = resizeImage(images(imageName), size)
 
+  def resizeImage(image: PImage, size: Int): PImage = {
+    image.resize(size, size)
+    image
+  }
 }
