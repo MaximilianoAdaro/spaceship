@@ -1,6 +1,6 @@
 package edu.austral.spaceship.base.model
 
-import edu.austral.spaceship.base.model.sprites.{Asteroid, Bullet}
+import edu.austral.spaceship.base.model.sprites.Bullet
 
 object ScoreCounter {
 
@@ -10,17 +10,13 @@ object ScoreCounter {
 
   def getScores: List[String] = scores.toList.map { case (name: String, value: Int) => name + ": " + value }
 
-
-  def onBulletCollisionWithAsteroid(bullet: Bullet, asteroid: Asteroid): Unit = {
-    val name = bullet.weapon.starship.player.name
-    val points = asteroid.asteroidType.points
-    scores = scores.updatedWith(name)(old => old.map(value => {
-      value + points
-    }) orElse Some(points))
+  def onBulletCollisionWithAsteroid(bullet: Bullet, points: Int): Unit = {
+    val name = bullet.starship.player.name
+    scores = scores.updatedWith(name)(old => old.map(value => {value + points}) orElse Some(points))
   }
 
   def onBulletCollisionWithStarship(bullet: Bullet): Unit = {
-    val name = bullet.weapon.starship.player.name
+    val name = bullet.starship.player.name
     scores = scores.updatedWith(name)(old => old.map(value => value + 500))
   }
 

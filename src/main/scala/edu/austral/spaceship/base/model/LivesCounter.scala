@@ -15,4 +15,8 @@ object LivesCounter {
   def getLives: List[String] = {
     livesPlayers.toList.map { case (name: String, value: Int) => name + ": " + value + "♥" }
   }
+
+  def getLivesByPlayer(playerName: String): Int = {
+    livesPlayers(playerName)
+  }
 }

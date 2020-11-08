@@ -20,6 +20,7 @@ object CustomGameFramework extends GameFramework {
     val maxX = Config.getIntegerProperty("maxX")
     val maxY = Config.getIntegerProperty("maxY")
     val maxLives = Config.getIntegerProperty("maxLives")
+    println(maxX, maxY, maxLives)
     windowsSettings.setSize(maxX, maxY)
     model.init(buildPlayers(), maxX, maxY, maxLives)
   }

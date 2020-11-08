@@ -1,6 +1,6 @@
 package edu.austral.spaceship.base.model.gameStates
 
-import edu.austral.spaceship.base.model.{ScoreCounter, SpaceshipGameModel, Sprite}
+import edu.austral.spaceship.base.model.{LivesCounter, ScoreCounter, SpaceshipGameModel, Sprite}
 import edu.austral.spaceship.base.view.ShapeProvider
 import processing.core.PGraphics
 
@@ -11,9 +11,8 @@ class PlayingState extends GameState {
     if (model.gameSprites.starships.nonEmpty) {
       val sprites = model.getSprites
       printAllSprites(sprites, pGraphics)
-      ScoreCounter
-        .getAll
-        .zipWithIndex
+      printScores(pGraphics)
+      printLives(pGraphics)
     }
     this
   }
@@ -25,10 +24,22 @@ class PlayingState extends GameState {
         pGraphics.imageMode(3)
         pGraphics.pushMatrix()
         pGraphics.translate(drawable.x, drawable.y)
-        pGraphics.rotate((drawable.dir + Math.PI / 2).toFloat)
+        pGraphics.rotate(drawable.dir)
         pGraphics.image(drawable.image, 0, 0)
         pGraphics.popMatrix()
       })
-
   }
+
+  def printScores(pGraphics: PGraphics): Unit = {
+    ScoreCounter.getScores.zipWithIndex.foreach {
+      case (player, index) => pGraphics.text(player, 100, 100 + index * 12)
+    }
+  }
+
+  def printLives(pGraphics: PGraphics): Unit = {
+    LivesCounter.getLives.zipWithIndex.foreach {
+      case (player, index) => pGraphics.text(player, 300, 300 + index * 12)
+    }
+  }
+
 }

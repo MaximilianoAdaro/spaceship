@@ -22,5 +22,7 @@ case class Vector2(x: Float, y: Float) {
 }
 
 object Vector2 {
+  def fromModule(module: Float, angle: Float): Vector2 = Vector2(module * cos(angle) toFloat, module * sin(angle) toFloat)
+
   val ZERO: Vector2 = Vector2(0, 0)
 }

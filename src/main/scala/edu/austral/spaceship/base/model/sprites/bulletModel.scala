@@ -9,7 +9,7 @@ import edu.austral.spaceship.base.util.Vector2
 import edu.austral.spaceship.base.view.ImageProvider
 import processing.core.PImage
 
-case class Bullet(bulletType: BulletType, position: Vector2, weapon: Weapon, speed: Vector2) extends Sprite with Collisionable {
+case class Bullet(bulletType: BulletType, position: Vector2, starship: Starship, speed: Vector2, timeCreated: Long) extends Sprite with Collisionable {
 
   override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, bulletType.size * 2, bulletType.size * 2)
 
@@ -18,6 +18,8 @@ case class Bullet(bulletType: BulletType, position: Vector2, weapon: Weapon, spe
   override def getPosition: Vector2 = position
 
   override def getSpeed: Vector2 = speed
+
+  def lifeTime: Long = System.currentTimeMillis() - timeCreated
 }
 
 case class BulletType(name: String, damage: Int, size: Int)
