@@ -11,14 +11,14 @@ object ShapeProvider {
   def loadShapes(imageLoader: ImageLoader): Unit = {
     imageProvider.setImages(
       Map(
-        "ASTEROID_SMALL" -> imageLoader.load("asteroid.gif"),
+        "ASTEROID_SMALL" -> imageLoader.load("asteroid.png"),
         "ASTEROID_BIG" -> imageLoader.load("asteroid.gif"),
-        "BULLET_SMALL" -> imageLoader.load("bullet.png"),
-        "BULLET_BIG" -> imageLoader.load("bullet.png"),
+        "BULLET_SMALL" -> imageLoader.load("bullet1.png"),
+        "BULLET_BIG" -> imageLoader.load("bullet2.png"),
         "STARSHIP_SMALL" -> imageLoader.load("starship.png"),
         "STARSHIP_BIG" -> imageLoader.load("starship.png"),
-        "GUN_SMALL" -> imageLoader.load("gun.png"),
-        "GUN_BIG" -> imageLoader.load("gun.png"),
+        "GUN_SMALL" -> imageLoader.load("gun1.png"),
+        "GUN_BIG" -> imageLoader.load("gun2.png"),
       )
     )
   }

@@ -42,8 +42,13 @@ object BulletEngine extends Engine[Bullet] {
   }
 
   def canShoot(starship: Starship, gameSprites: GameSprites): Boolean = {
-    val lastBulletLifeTime = gameSprites.bullets.filter(bullet => bullet.starship.player == starship.player).minBy(bullet => bullet.lifeTime).lifeTime
-    (1000.0 / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime //todo: revisar esto
+    val theirBullets = gameSprites.bullets.filter(bullet => bullet.starship.player == starship.player)
+    if (theirBullets.isEmpty) {
+      true
+    } else {
+      val lastBulletLifeTime = theirBullets.minBy(bullet => bullet.lifeTime).lifeTime
+      (1000.0 / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime //todo: revisar esto}
+    }
   }
 
   def newBullet(starship: Starship): Bullet = {

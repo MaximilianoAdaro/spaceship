@@ -9,8 +9,8 @@ import scala.util.Random
 object StarshipEngine extends Engine[Starship] {
 
   var starshipTypes: List[StarshipType] = List(
-    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 50),
-    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 60)
+    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 100),
+    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 150)
   )
 
   def getStarshipType: StarshipType = starshipTypes(Random.nextInt(2))
