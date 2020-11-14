@@ -10,18 +10,28 @@ import processing.event.KeyEvent
 
 object CustomGameFramework extends GameFramework {
 
-  val model: SpaceshipGameModel = new SpaceshipGameModel
+  var model: SpaceshipGameModel = new SpaceshipGameModel
   var keysDown: Set[Char] = Set()
   var gameState: GameState = new PlayingState
+
+  var maxX = 0
+  var maxY = 0
+  var maxLives = 0
+
 
   override def setup(windowsSettings: WindowSettings, imageLoader: ImageLoader): Unit = {
     Config.init("/starship.props")
     ShapeProvider.loadShapes(imageLoader)
-    val maxX = Config.getIntegerProperty("maxX")
-    val maxY = Config.getIntegerProperty("maxY")
-    val maxLives = Config.getIntegerProperty("maxLives")
+    maxX = Config.getIntegerProperty("maxX")
+    maxY = Config.getIntegerProperty("maxY")
+    maxLives = Config.getIntegerProperty("maxLives")
     println(maxX, maxY, maxLives)
     windowsSettings.setSize(maxX, maxY)
+    initGameModel()
+  }
+
+  def initGameModel(): Unit = {
+    model = new SpaceshipGameModel
     model.init(buildPlayers(), maxX, maxY, maxLives)
   }
 

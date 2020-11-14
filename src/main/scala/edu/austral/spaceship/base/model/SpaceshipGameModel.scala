@@ -1,8 +1,9 @@
 package edu.austral.spaceship.base.model
 
+import edu.austral.spaceship.base.collision.Collisionable
 import edu.austral.spaceship.base.model.engines.{AsteroidEngine, BulletEngine, StarshipEngine, WeaponEngine}
-import edu.austral.spaceship.base.model.sprites.{Starship, StarshipType}
-import edu.austral.spaceship.base.util.{Config, Vector2}
+import edu.austral.spaceship.base.model.sprites.Starship
+import edu.austral.spaceship.base.util.Vector2
 
 class SpaceshipGameModel {
 
@@ -37,6 +38,6 @@ class SpaceshipGameModel {
     )
   }
 
-  def getSprites: List[Sprite] = gameSprites.starships ::: gameSprites.asteroids ::: gameSprites.bullets ::: gameSprites.weapons
+  def getSprites: List[Sprite with Collisionable] = gameSprites.starships ::: gameSprites.asteroids ::: gameSprites.bullets ::: gameSprites.weapons
 
 }

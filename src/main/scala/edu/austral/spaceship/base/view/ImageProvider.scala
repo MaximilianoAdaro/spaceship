@@ -1,6 +1,7 @@
 package edu.austral.spaceship.base.view
 
 import edu.austral.spaceship.base.model.Sprite
+import edu.austral.spaceship.base.view.ShapeProvider.imageProvider.images
 import processing.core.PImage
 
 class ImageProvider {
@@ -15,5 +16,11 @@ class ImageProvider {
   def resizeImage(image: PImage, size: Int): PImage = {
     image.resize(size, size)
     image
+  }
+}
+
+object ImageProvider {
+  def getImageByName(imageName: String): PImage = {
+    images(imageName)
   }
 }

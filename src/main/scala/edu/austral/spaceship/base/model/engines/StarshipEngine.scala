@@ -9,8 +9,8 @@ import scala.util.Random
 object StarshipEngine extends Engine[Starship] {
 
   var starshipTypes: List[StarshipType] = List(
-    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 100),
-    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 150)
+    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 50),
+    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 80)
   )
 
   def getStarshipType: StarshipType = starshipTypes(Random.nextInt(2))
@@ -38,23 +38,27 @@ object StarshipEngine extends Engine[Starship] {
     val otherBullets = gameSprites.bullets.filter(_.starship.player != starship.player)
     val playerName = starship.player.name
     val lives = LivesCounter.getLivesByPlayer(playerName)
-    val notDied = lives <= 0
+    val dieTime = starship.lastDie + 1000 < System.currentTimeMillis()
+    val isDied = lives <= 0
 
-    if (notDied && starship.collidesWithAny(gameSprites.asteroids ::: otherBullets)) {
+    if (!isDied && dieTime && starship.collidesWithAny(gameSprites.asteroids ::: otherBullets)) {
       LivesCounter.onLifeLost(playerName)
 
-      if (lives <= 1) {
-        ScoreCounter.reset(playerName)
+      if (lives == 1) {
         None
+      } else {
+        Some(starship.copy(lastDie = System.currentTimeMillis()))
       }
     }
-    Some(starship)
+    else Some(starship)
   }
 
   def processKeys(starship: Starship, keysDown: Set[Char]): Starship = {
     var deltaX: Float = 0
     var deltaY: Float = 0
-    val speedDelta = 0.5F
+    val deltaXMax: Float = 10
+    val deltaYMax: Float = 10
+    val speedDelta = 0.3F
 
     keysDown.foreach {
       case starship.player.controls.upKey => deltaY = deltaY - speedDelta
@@ -64,7 +68,22 @@ object StarshipEngine extends Engine[Starship] {
       case _ =>
     }
 
-    starship.copy(speed = Vector2(starship.speed.x + deltaX, starship.speed.y + deltaY))
+    var xSpeed: Float = starship.speed.x + deltaX
+    var ySpeed: Float = starship.speed.y + deltaY
+
+    starship.speed.x + deltaX match {
+      case x if x > deltaXMax => xSpeed = deltaXMax
+      case x if x < -deltaXMax => xSpeed = -deltaXMax
+      case _ =>
+    }
+
+    starship.speed.y + deltaY match {
+      case y if y > deltaYMax => ySpeed = deltaYMax
+      case y if y < -deltaYMax => ySpeed = -deltaYMax
+      case _ =>
+    }
+
+    starship.copy(speed = Vector2(xSpeed, ySpeed))
   }
 
   def checkBorders(starship: Starship, maxX: Int, maxY: Int): Starship = {
@@ -72,13 +91,13 @@ object StarshipEngine extends Engine[Starship] {
     var ySpeed = starship.speed.y
 
     starship.position.x match {
-      case x if x < 50 => xSpeed = 5
-      case x if x > maxX - 50 => xSpeed = -5
+      case x if x < starship.starshipType.size / 2 => xSpeed = 3
+      case x if x > maxX - starship.starshipType.size / 2 => xSpeed = -3
       case _ =>
     }
     starship.position.y match {
-      case y if y < 50 => ySpeed = 5
-      case y if y > maxY + 50 => ySpeed = -5
+      case y if y < starship.starshipType.size / 2 => ySpeed = 3
+      case y if y > maxY - starship.starshipType.size / 2 => ySpeed = -3
       case _ =>
     }
     starship.copy(speed = Vector2(xSpeed, ySpeed))

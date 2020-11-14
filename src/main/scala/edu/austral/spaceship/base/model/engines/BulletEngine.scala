@@ -10,10 +10,11 @@ object BulletEngine extends Engine[Bullet] {
 
   var bulletTypes: List[BulletType] = List(
     BulletType("BULLET_SMALL", 50, 20),
-    BulletType("BULLET_BIG", 100, 25)
+    BulletType("BULLET_BIG", 100, 25),
+    BulletType("BULLET_BIG", 150, 35),
   )
 
-  def getABulletType: BulletType = bulletTypes(Random.nextInt(2))
+  def getABulletType: BulletType = bulletTypes(Random.nextInt(3))
 
   override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Bullet] = {
     gameSprites.bullets.flatMap(bullet => plusTimeBullet(gameSprites, bullet, maxX, maxY)) ::: newBullets(gameSprites, keysDown)
@@ -47,7 +48,7 @@ object BulletEngine extends Engine[Bullet] {
       true
     } else {
       val lastBulletLifeTime = theirBullets.minBy(bullet => bullet.lifeTime).lifeTime
-      (1000.0 / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime //todo: revisar esto}
+      (1000.0 / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime
     }
   }
 

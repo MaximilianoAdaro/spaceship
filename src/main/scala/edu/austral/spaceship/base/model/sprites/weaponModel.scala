@@ -20,4 +20,4 @@ case class Weapon(weaponType: WeaponType, position: Vector2, starship: Starship,
   override def getSpeed: Vector2 = speed
 }
 
-case class WeaponType(name: String, bulletType: BulletType, fireRate: Int, size: Int)
+case class WeaponType(name: String, bulletType: BulletType, fireRate: Float, size: Int)

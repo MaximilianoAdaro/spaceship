@@ -1,5 +1,5 @@
-maxX = 1500
-maxY = 1000
+maxX = 1280
+maxY = 720
 maxLives = 3
 players = 1
 
@@ -9,3 +9,10 @@ down1 = s
 left1 = a
 right1 = d
 shoot1 = q
+
+playerName2 = Brayan
+up2 = i
+down2 = k
+left2 = j
+right2 = l
+shoot2 = u

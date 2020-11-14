@@ -9,11 +9,12 @@ import scala.util.Random
 object WeaponEngine extends Engine[Weapon] {
 
   var weaponTypes: List[WeaponType] = List(
-    WeaponType("GUN_SMALL", BulletEngine.getABulletType, 1, 25),
-    WeaponType("GUN_BIG", BulletEngine.getABulletType, 5, 25)
+    WeaponType("GUN_SMALL", BulletEngine.getABulletType, 1, 10),
+    WeaponType("GUN_BIG", BulletEngine.getABulletType, 3, 15),
+    WeaponType("GUN_BIG", BulletEngine.getABulletType, 7, 20),
   )
 
-  def getAWeaponType: WeaponType = weaponTypes(Random.nextInt(2))
+  def getAWeaponType: WeaponType = weaponTypes(Random.nextInt(3))
 
   override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Weapon] = {
     gameSprites.starships.map(starship => {
