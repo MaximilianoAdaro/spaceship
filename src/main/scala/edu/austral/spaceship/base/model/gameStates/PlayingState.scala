@@ -2,7 +2,7 @@ package edu.austral.spaceship.base.model.gameStates
 
 import edu.austral.spaceship.base.collision.Collisionable
 import edu.austral.spaceship.base.model.{LivesCounter, ScoreCounter, SpaceshipGameModel, Sprite}
-import edu.austral.spaceship.base.view.ShapeProvider
+import edu.austral.spaceship.base.view.{ImageProvider, ShapeProvider}
 import processing.core.PGraphics
 
 case class PlayingState() extends GameState {
@@ -11,12 +11,17 @@ case class PlayingState() extends GameState {
     model.nextCycle(keySet)
     if (model.gameSprites.starships.nonEmpty) {
       val sprites = model.getSprites
+      printBackground(pGraphics, model.maxX, model.maxY)
       printAllSprites(sprites, pGraphics)
       printScores(pGraphics)
       printLives(pGraphics)
       this
     }
     else new FinishedState
+  }
+
+  def printBackground(pGraphics: PGraphics, maxX: Int, maxY: Int): Unit = {
+    pGraphics.background(ImageProvider.getImageByName("BACKGROUND", maxX, maxY))
   }
 
   def printAllSprites(sprites: List[Sprite with Collisionable], pGraphics: PGraphics): Unit = {
