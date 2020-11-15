@@ -30,7 +30,7 @@ object StarshipEngine extends Engine[Starship] {
 
   def addPoints(gameSprites: GameSprites, starship: Starship): Unit = {
     gameSprites.bullets.filter(_.starship.player != starship.player).foreach(bullet => {
-      if (starship.collidesWith(bullet)) ScoreCounter.onBulletCollisionWithStarship(bullet)
+      if (starship.collidesWith(bullet) && canDieCooler(starship)) ScoreCounter.onBulletCollisionWithStarship(bullet)
     })
   }
 
@@ -38,7 +38,7 @@ object StarshipEngine extends Engine[Starship] {
     val otherBullets = gameSprites.bullets.filter(_.starship.player != starship.player)
     val playerName = starship.player.name
     val lives = LivesCounter.getLivesByPlayer(playerName)
-    val dieTime = starship.lastDie + 1000 < System.currentTimeMillis()
+    val dieTime = canDieCooler(starship)
     val isDied = lives <= 0
 
     if (!isDied && dieTime && starship.collidesWithAny(gameSprites.asteroids ::: otherBullets)) {
@@ -51,6 +51,10 @@ object StarshipEngine extends Engine[Starship] {
       }
     }
     else Some(starship)
+  }
+
+  private def canDieCooler(starship: Starship): Boolean = {
+    starship.lastDie + 1000 < System.currentTimeMillis()
   }
 
   def processKeys(starship: Starship, keysDown: Set[Char]): Starship = {

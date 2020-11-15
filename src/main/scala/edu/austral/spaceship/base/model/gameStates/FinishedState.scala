@@ -10,12 +10,7 @@ case class FinishedState() extends GameState {
   val timeShown = 4000
 
   override def draw(model: SpaceshipGameModel, PGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState = {
-    ScoreCounter.getScores.foreach(score => {
-      PGraphics.fill(255, 0, 0)
-      PGraphics.text("Finished", model.maxX / 2, model.maxY / 2 - 30)
-      PGraphics.text(score, model.maxX / 2, model.maxY / 2)
-      PGraphics.fill(255, 255, 255)
-    })
+    printScore(model, PGraphics)
     if (runtime == 0) {
       runtime = System.currentTimeMillis()
     } else if (runtime + timeShown < System.currentTimeMillis()) {
@@ -25,4 +20,12 @@ case class FinishedState() extends GameState {
     this
   }
 
+  private def printScore(model: SpaceshipGameModel, PGraphics: PGraphics): Unit = {
+    PGraphics.fill(255, 0, 0)
+    PGraphics.text("Finished", model.maxX / 2, model.maxY / 2 - 30)
+    ScoreCounter.getScores.zipWithIndex.foreach {
+      case (score: String, index: Int) => PGraphics.text(score, model.maxX / 2, model.maxY / 2 + index * 12)
+    }
+    PGraphics.fill(255, 255, 255)
+  }
 }
