@@ -18,7 +18,7 @@ object ShapeProvider {
         "BULLET_BIG" -> imageLoader.load("bullet1.png"),
         "STARSHIP_SMALL" -> imageLoader.load("starship.png"),
         "STARSHIP_BIG" -> imageLoader.load("starship.png"),
-        "GUN_SMALL" -> imageLoader.load("gun2.png"),
+        "GUN_SMALL" -> imageLoader.load("gun1.png"),
         "GUN_BIG" -> imageLoader.load("gun2.png"),
         "BACKGROUND" -> imageLoader.load("background.png"),
         "BACKGROUND_2" -> imageLoader.load("background.jpg")

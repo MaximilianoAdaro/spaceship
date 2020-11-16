@@ -9,9 +9,9 @@ import scala.util.Random
 object WeaponEngine extends Engine[Weapon] {
 
   var weaponTypes: List[WeaponType] = List(
-    WeaponType("GUN_SMALL", BulletEngine.getABulletType, getAShootStrategy, 1, 10),
-    WeaponType("GUN_BIG", BulletEngine.getABulletType, getAShootStrategy, 3, 15),
-    WeaponType("GUN_BIG", BulletEngine.getABulletType, getAShootStrategy, 7, 20),
+    WeaponType("GUN_SMALL", BulletEngine.getABulletType, getAShootStrategy, 1, 20),
+    WeaponType("GUN_BIG", BulletEngine.getABulletType, getAShootStrategy, 3, 25),
+    WeaponType("GUN_BIG", BulletEngine.getABulletType, getAShootStrategy, 7, 30),
   )
 
   def getAWeaponType: WeaponType = weaponTypes(Random.nextInt(3))
