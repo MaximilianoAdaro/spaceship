@@ -9,21 +9,27 @@ import scala.util.Random
 object AsteroidEngine extends Engine[Asteroid] {
 
   var asteroidTypes: List[AsteroidType] = List(
-    AsteroidType("ASTEROID_SMALL", 1, 50, 40),
-    AsteroidType("ASTEROID_BIG", 1, 25, 60)
+    AsteroidType("ASTEROID_SMALL", Random.between(30, 90), 50, 40),
+    AsteroidType("ASTEROID_BIG", Random.between(70, 120), 25, 60)
   )
 
   def getAnAsteroidType: AsteroidType = asteroidTypes(Random.nextInt(2))
 
-  override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Asteroid] = {
+  override def nextCycle(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Asteroid] = {
     gameSprites.asteroids.flatMap(plusTimeAsteroid(_, gameSprites.bullets, maxX, maxY)) ::: newAsteroid(maxX, maxY)
   }
 
   def plusTimeAsteroid(asteroid: Asteroid, bullets: List[Bullet], maxX: Int, maxY: Int): Option[Asteroid] = {
     bullets.foreach(bullet => {
+      val bDamage = bullet.bulletType.damage
       if (bullet.collidesWith(asteroid)) {
-        ScoreCounter.onBulletCollisionWithAsteroid(bullet, asteroid.asteroidType.points)
-        return None
+        asteroid.asteroidType.health match {
+          case h if (h - asteroid.damageReceived) > bDamage =>
+            return Some(asteroid.copy(position = asteroid.position + asteroid.speed, damageReceived = bDamage + asteroid.damageReceived))
+          case _ =>
+            ScoreCounter.onBulletCollisionWithAsteroid(bullet, asteroid.asteroidType.points)
+            return None
+        }
       }
     })
     if (isInside(asteroid, maxX, maxY))

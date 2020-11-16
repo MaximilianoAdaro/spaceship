@@ -16,7 +16,7 @@ object BulletEngine extends Engine[Bullet] {
 
   def getABulletType: BulletType = bulletTypes(Random.nextInt(3))
 
-  override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Bullet] = {
+  override def nextCycle(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Bullet] = {
     gameSprites.bullets.flatMap(bullet => plusTimeBullet(gameSprites, bullet, maxX, maxY)) ::: newBullets(gameSprites, keysDown)
   }
 
@@ -32,7 +32,6 @@ object BulletEngine extends Engine[Bullet] {
       gameSprites.starships.filter(starship => starship.player != bullet.starship.player)
     bullet.collidesWithAny(possibleCollision)
   }
-
 
   def newBullets(gameSprites: GameSprites, keysDown: Set[Char]): List[Bullet] = {
     gameSprites.starships.flatMap(starship => {
@@ -59,6 +58,6 @@ object BulletEngine extends Engine[Bullet] {
     val position = starship.position
     val speed = starship.speed.unitary * 15
     val time = System.currentTimeMillis()
-    starship.starshipType.weaponType.shoot(bulletType, position, starship, speed, time)
+    starship.starshipType.weaponType.shootStrategy.shoot(bulletType, position, starship, speed, time)
   }
 }

@@ -21,7 +21,7 @@ case class FinishedState() extends GameState {
     this
   }
 
-  private def printScore(model: SpaceshipGameModel, pGraphics: PGraphics): Unit = {
+  def printScore(model: SpaceshipGameModel, pGraphics: PGraphics): Unit = {
     printBackground(pGraphics, model.maxX, model.maxY)
     pGraphics.fill(255, 0, 0)
     pGraphics.text("Finished", model.maxX / 2, model.maxY / 2 - 130)

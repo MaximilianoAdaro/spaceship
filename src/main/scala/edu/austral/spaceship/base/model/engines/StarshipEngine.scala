@@ -19,7 +19,7 @@ object StarshipEngine extends Engine[Starship] {
     starshipType
   }
 
-  override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Starship] = {
+  override def nextCycle(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Starship] = {
     gameSprites.starships.flatMap(starship => {
       val newStarship = plusTimeStarship(starship, keysDown, maxX, maxY)
       addPoints(gameSprites, newStarship)
@@ -57,7 +57,7 @@ object StarshipEngine extends Engine[Starship] {
     else Some(starship)
   }
 
-  private def canDieCooler(starship: Starship): Boolean = {
+  def canDieCooler(starship: Starship): Boolean = {
     starship.lastDie + 1000 < System.currentTimeMillis()
   }
 

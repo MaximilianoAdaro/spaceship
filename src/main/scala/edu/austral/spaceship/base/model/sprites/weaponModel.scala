@@ -20,10 +20,4 @@ case class Weapon(weaponType: WeaponType, position: Vector2, starship: Starship,
   override def getSpeed: Vector2 = speed
 }
 
-case class WeaponType(name: String, bulletType: BulletType, shootStrategy: ShootStrategy, fireRate: Float, size: Int) {
-
-  def shoot(bulletType: BulletType, position: Vector2, starship: Starship, speed: Vector2, timeCreated: Long): List[Bullet] = {
-    shootStrategy.shoot(bulletType, position, starship, speed, timeCreated)
-  }
-
-}
+case class WeaponType(name: String, bulletType: BulletType, shootStrategy: ShootStrategy, fireRate: Float, size: Int)

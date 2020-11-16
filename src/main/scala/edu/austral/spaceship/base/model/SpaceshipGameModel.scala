@@ -31,10 +31,10 @@ class SpaceshipGameModel {
 
   def nextCycle(keyDown: Set[Char]): Unit = {
     gameSprites = GameSprites(
-      StarshipEngine.plusTime(gameSprites, keyDown, maxX, maxY),
-      AsteroidEngine.plusTime(gameSprites, keyDown, maxX, maxY),
-      WeaponEngine.plusTime(gameSprites, keyDown, maxX, maxY),
-      BulletEngine.plusTime(gameSprites, keyDown, maxX, maxY)
+      StarshipEngine.nextCycle(gameSprites, keyDown, maxX, maxY),
+      AsteroidEngine.nextCycle(gameSprites, keyDown, maxX, maxY),
+      WeaponEngine.nextCycle(gameSprites, keyDown, maxX, maxY),
+      BulletEngine.nextCycle(gameSprites, keyDown, maxX, maxY)
     )
   }
 

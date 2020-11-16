@@ -9,7 +9,7 @@ import edu.austral.spaceship.base.util.Vector2
 import edu.austral.spaceship.base.view.ImageProvider
 import processing.core.PImage
 
-case class Asteroid(asteroidType: AsteroidType, position: Vector2, speed: Vector2) extends Sprite with Collisionable {
+case class Asteroid(asteroidType: AsteroidType, position: Vector2, speed: Vector2, damageReceived: Int = 0) extends Sprite with Collisionable {
 
   override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, asteroidType.size, asteroidType.size)
 

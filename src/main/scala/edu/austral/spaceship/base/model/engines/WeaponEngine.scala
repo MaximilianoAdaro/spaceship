@@ -18,7 +18,7 @@ object WeaponEngine extends Engine[Weapon] {
 
   def getAShootStrategy: ShootStrategy = List(SingleShot, MultiShot)(Random.nextInt(2))
 
-  override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Weapon] = {
+  override def nextCycle(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Weapon] = {
     gameSprites.starships.map(starship => {
       Weapon(starship.starshipType.weaponType, starship.position + Vector2(-25, 35), starship, starship.speed)
     })
