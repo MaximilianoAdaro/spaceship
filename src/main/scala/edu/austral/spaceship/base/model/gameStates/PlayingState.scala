@@ -7,7 +7,7 @@ import processing.core.PGraphics
 
 case class PlayingState() extends GameState {
 
-  override def draw(model: SpaceshipGameModel, pGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState = {
+  override def next(model: SpaceshipGameModel, pGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState = {
     model.nextCycle(keySet)
     if (model.gameSprites.starships.nonEmpty) {
       val sprites = model.getSprites
@@ -32,11 +32,7 @@ case class PlayingState() extends GameState {
         pGraphics.pushMatrix()
         pGraphics.translate(drawable.x, drawable.y)
         pGraphics.rotate(drawable.dir)
-        //        pGraphics.image(drawable.image, drawable.image.width / -2f, drawable.image.height / -2f)
         pGraphics.image(drawable.image, 0, 0)
-        //        println("W: " + drawable.image.width)
-        //        println("H: " + drawable.image.height)
-        //        pGraphics.ellipse(drawable.shape.getBounds.x.toFloat, drawable.shape.getBounds.y.toFloat, drawable.shape.getBounds.width.toFloat, drawable.shape.getBounds.height.toFloat)
         pGraphics.popMatrix()
       })
   }

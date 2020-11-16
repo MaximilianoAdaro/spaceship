@@ -10,7 +10,7 @@ case class FinishedState() extends GameState {
   var runtime: Long = 0
   val timeShown = 4000
 
-  override def draw(model: SpaceshipGameModel, PGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState = {
+  override def next(model: SpaceshipGameModel, PGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState = {
     printScore(model, PGraphics)
     if (runtime == 0) {
       runtime = System.currentTimeMillis()

@@ -53,7 +53,7 @@ object CustomGameFramework extends GameFramework {
   }
 
   override def draw(graphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Int]): Unit = {
-    gameState = gameState.draw(model, graphics, timeSinceLastDraw, keysDown)
+    gameState = gameState.next(model, graphics, timeSinceLastDraw, keysDown)
   }
 
   override def keyPressed(event: KeyEvent): Unit = {

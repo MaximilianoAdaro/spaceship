@@ -5,6 +5,6 @@ import processing.core.PGraphics
 
 trait GameState {
 
-  def draw(model: SpaceshipGameModel, PGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState
+  def next(model: SpaceshipGameModel, PGraphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Char]): GameState
 
 }
