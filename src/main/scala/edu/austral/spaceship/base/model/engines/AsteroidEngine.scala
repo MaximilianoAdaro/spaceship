@@ -9,8 +9,8 @@ import scala.util.Random
 object AsteroidEngine extends Engine[Asteroid] {
 
   var asteroidTypes: List[AsteroidType] = List(
-    AsteroidType("ASTEROID_SMALL", 1, 50, 20),
-    AsteroidType("ASTEROID_BIG", 1, 25, 30)
+    AsteroidType("ASTEROID_SMALL", 1, 50, 40),
+    AsteroidType("ASTEROID_BIG", 1, 25, 60)
   )
 
   def getAnAsteroidType: AsteroidType = asteroidTypes(Random.nextInt(2))

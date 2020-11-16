@@ -11,7 +11,7 @@ import processing.core.PImage
 
 case class Starship(starshipType: StarshipType, position: Vector2, player: Player, maxLives: Int, speed: Vector2, lastDie: Long = 0) extends Sprite with Collisionable {
 
-  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, starshipType.size * 2, starshipType.size * 2)
+  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, starshipType.size, starshipType.size)
 
   override def getImage(visitor: ImageProvider): PImage = visitor.getImage(starshipType.name, starshipType.size)
 

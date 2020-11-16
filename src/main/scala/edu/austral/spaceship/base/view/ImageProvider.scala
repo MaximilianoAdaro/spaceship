@@ -14,7 +14,6 @@ class ImageProvider {
 
   def getImage(imageName: String, size: Int): PImage = resizeImage(images(imageName), size, size)
 
-
 }
 
 object ImageProvider {

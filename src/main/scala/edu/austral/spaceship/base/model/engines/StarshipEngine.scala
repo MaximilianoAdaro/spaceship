@@ -9,11 +9,15 @@ import scala.util.Random
 object StarshipEngine extends Engine[Starship] {
 
   var starshipTypes: List[StarshipType] = List(
-    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 50),
-    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 80)
+    StarshipType("STARSHIP_SMALL", WeaponEngine.getAWeaponType, 75),
+    StarshipType("STARSHIP_BIG", WeaponEngine.getAWeaponType, 100)
   )
 
-  def getStarshipType: StarshipType = starshipTypes(Random.nextInt(2))
+  def getStarshipType: StarshipType = {
+    val starshipType = starshipTypes(Random.nextInt(2))
+    println(starshipType)
+    starshipType
+  }
 
   override def plusTime(gameSprites: GameSprites, keysDown: Set[Char], maxX: Int, maxY: Int): List[Starship] = {
     gameSprites.starships.flatMap(starship => {

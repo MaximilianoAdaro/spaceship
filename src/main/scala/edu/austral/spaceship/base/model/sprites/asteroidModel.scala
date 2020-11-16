@@ -11,7 +11,7 @@ import processing.core.PImage
 
 case class Asteroid(asteroidType: AsteroidType, position: Vector2, speed: Vector2) extends Sprite with Collisionable {
 
-  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, asteroidType.size * 2, asteroidType.size * 2)
+  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, asteroidType.size, asteroidType.size)
 
   override def getImage(visitor: ImageProvider): PImage = visitor.getImage(asteroidType.name, asteroidType.size)
 

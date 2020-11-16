@@ -9,9 +9,9 @@ import scala.util.Random
 object BulletEngine extends Engine[Bullet] {
 
   var bulletTypes: List[BulletType] = List(
-    BulletType("BULLET_SMALL", 50, 20),
-    BulletType("BULLET_BIG", 100, 25),
-    BulletType("BULLET_BIG", 150, 35),
+    BulletType("BULLET_SMALL", 50, 30),
+    BulletType("BULLET_BIG", 100, 35),
+    BulletType("BULLET_BIG", 150, 40),
   )
 
   def getABulletType: BulletType = bulletTypes(Random.nextInt(3))
@@ -37,22 +37,28 @@ object BulletEngine extends Engine[Bullet] {
   def newBullets(gameSprites: GameSprites, keysDown: Set[Char]): List[Bullet] = {
     gameSprites.starships.flatMap(starship => {
       if (keysDown.contains(starship.player.controls.shootKey) && canShoot(starship, gameSprites)) {
-        Some(newBullet(starship))
+        newBullet(starship)
       } else None
     })
   }
 
+  // Each starship has a cooler time
   def canShoot(starship: Starship, gameSprites: GameSprites): Boolean = {
     val theirBullets = gameSprites.bullets.filter(bullet => bullet.starship.player == starship.player)
+    val coolerTime = 1000.0
     if (theirBullets.isEmpty) {
       true
     } else {
       val lastBulletLifeTime = theirBullets.minBy(bullet => bullet.lifeTime).lifeTime
-      (1000.0 / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime
+      (coolerTime / starship.starshipType.weaponType.fireRate) <= lastBulletLifeTime
     }
   }
 
-  def newBullet(starship: Starship): Bullet = {
-    Bullet(starship.starshipType.weaponType.bulletType, starship.position, starship, starship.speed.unitary * 15, System.currentTimeMillis())
+  def newBullet(starship: Starship): List[Bullet] = {
+    val bulletType = starship.starshipType.weaponType.bulletType
+    val position = starship.position
+    val speed = starship.speed.unitary * 15
+    val time = System.currentTimeMillis()
+    starship.starshipType.weaponType.shoot(bulletType, position, starship, speed, time)
   }
 }

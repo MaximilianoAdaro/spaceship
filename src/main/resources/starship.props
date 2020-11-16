@@ -1,7 +1,7 @@
 maxX = 1280
 maxY = 720
 maxLives = 3
-players = 1
+players = 3
 
 playerName1 = Maxi
 up1 = w
@@ -16,3 +16,10 @@ down2 = k
 left2 = j
 right2 = l
 shoot2 = u
+
+playerName3 = Agus
+up3 = t
+down3 = g
+left3 = f
+right3 = h
+shoot3 = r

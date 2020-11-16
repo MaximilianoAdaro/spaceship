@@ -11,7 +11,7 @@ import processing.core.PImage
 
 case class Bullet(bulletType: BulletType, position: Vector2, starship: Starship, speed: Vector2, timeCreated: Long) extends Sprite with Collisionable {
 
-  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, bulletType.size * 2, bulletType.size * 2)
+  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, bulletType.size * 3 / 2, bulletType.size * 3 / 2)
 
   override def getImage(visitor: ImageProvider): PImage = visitor.getImage(bulletType.name, bulletType.size)
 

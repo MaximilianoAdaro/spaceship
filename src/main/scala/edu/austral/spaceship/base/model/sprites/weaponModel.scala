@@ -4,7 +4,7 @@ import java.awt.Shape
 import java.awt.geom.Ellipse2D
 
 import edu.austral.spaceship.base.collision.Collisionable
-import edu.austral.spaceship.base.model.Sprite
+import edu.austral.spaceship.base.model.{ShootStrategy, Sprite}
 import edu.austral.spaceship.base.util.Vector2
 import edu.austral.spaceship.base.view.ImageProvider
 import processing.core.PImage
@@ -20,4 +20,10 @@ case class Weapon(weaponType: WeaponType, position: Vector2, starship: Starship,
   override def getSpeed: Vector2 = speed
 }
 
-case class WeaponType(name: String, bulletType: BulletType, fireRate: Float, size: Int)
+case class WeaponType(name: String, bulletType: BulletType, shootStrategy: ShootStrategy, fireRate: Float, size: Int) {
+
+  def shoot(bulletType: BulletType, position: Vector2, starship: Starship, speed: Vector2, timeCreated: Long): List[Bullet] = {
+    shootStrategy.shoot(bulletType, position, starship, speed, timeCreated)
+  }
+
+}
